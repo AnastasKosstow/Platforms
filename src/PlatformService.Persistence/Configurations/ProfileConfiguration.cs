@@ -10,11 +10,11 @@ namespace PlatformService.Persistence.Configurations
         {
             builder
                 .Property(user => user.Name)
-                .IsRequired();
+                .IsRequired(true);
 
             builder
                 .Property(user => user.Publisher)
-                .IsRequired();
+                .IsRequired(true);
         }
     }
 }

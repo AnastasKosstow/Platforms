@@ -15,15 +15,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{C68DE25E-88DA-4FC1-82A5-A23F8EB5531D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformService.Application", "PlatformService.Application\PlatformService.Application.csproj", "{33230227-0D3C-484D-8B75-96FE4EE4CAC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlatformService.Application", "PlatformService.Application\PlatformService.Application.csproj", "{33230227-0D3C-484D-8B75-96FE4EE4CAC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformService.Infrastructure", "PlatformService.Infrastructure\PlatformService.Infrastructure.csproj", "{0E991EE2-756F-4F95-9F7A-15721728A405}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlatformService.Infrastructure", "PlatformService.Infrastructure\PlatformService.Infrastructure.csproj", "{0E991EE2-756F-4F95-9F7A-15721728A405}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformService.Persistence", "PlatformService.Persistence\PlatformService.Persistence.csproj", "{1A905F4B-EC7F-4329-ADF1-506CC3B9C5A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlatformService.Persistence", "PlatformService.Persistence\PlatformService.Persistence.csproj", "{1A905F4B-EC7F-4329-ADF1-506CC3B9C5A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformService.StartUp", "PlatformService.StartUp\PlatformService.StartUp.csproj", "{F1A9C004-D47D-4962-86A9-1BFDA806A7FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlatformService.StartUp", "PlatformService.StartUp\PlatformService.StartUp.csproj", "{F1A9C004-D47D-4962-86A9-1BFDA806A7FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformService.Web", "PlatformService.Web\PlatformService.Web.csproj", "{7FFAA417-C1BE-40AD-A348-3CD60D41A4F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlatformService.Web", "PlatformService.Web\PlatformService.Web.csproj", "{7FFAA417-C1BE-40AD-A348-3CD60D41A4F4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformService.Persistence.Repositories", "PlatformService.Persistence.Repositories\PlatformService.Persistence.Repositories.csproj", "{59908C15-06B5-414D-95F5-B30443091663}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{7FFAA417-C1BE-40AD-A348-3CD60D41A4F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FFAA417-C1BE-40AD-A348-3CD60D41A4F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FFAA417-C1BE-40AD-A348-3CD60D41A4F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59908C15-06B5-414D-95F5-B30443091663}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59908C15-06B5-414D-95F5-B30443091663}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59908C15-06B5-414D-95F5-B30443091663}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59908C15-06B5-414D-95F5-B30443091663}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +72,7 @@ Global
 		{1A905F4B-EC7F-4329-ADF1-506CC3B9C5A1} = {858D1A98-A032-4E1A-A233-880282423AB7}
 		{F1A9C004-D47D-4962-86A9-1BFDA806A7FB} = {F3969325-13D8-46FD-B66C-16422F5B3CB8}
 		{7FFAA417-C1BE-40AD-A348-3CD60D41A4F4} = {F3969325-13D8-46FD-B66C-16422F5B3CB8}
+		{59908C15-06B5-414D-95F5-B30443091663} = {858D1A98-A032-4E1A-A233-880282423AB7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {33588E92-87CB-43F3-A2A4-4A550566404F}
