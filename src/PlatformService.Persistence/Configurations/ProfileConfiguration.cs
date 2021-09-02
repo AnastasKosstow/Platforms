@@ -8,6 +8,13 @@ namespace PlatformService.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<Platform> builder)
         {
+            builder
+                .Property(user => user.Name)
+                .IsRequired();
+
+            builder
+                .Property(user => user.Publisher)
+                .IsRequired();
         }
     }
 }
