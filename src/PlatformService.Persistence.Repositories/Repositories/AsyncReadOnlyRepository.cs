@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PlatformService.Persistence.Repositories.Repositories
 {
-    public class AsyncReadOnlyRepository<TEntity> : BaseRepository<TEntity>, IAsyncReadOnlyRepository
+    public class AsyncReadOnlyRepository<TEntity> : BaseAsyncRepository<TEntity>, IAsyncReadOnlyRepository<TEntity>
         where TEntity : class
     {
         public AsyncReadOnlyRepository(ApplicationDbContext applicationDbContext)

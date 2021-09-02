@@ -2,6 +2,9 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PlatformService.Persistence;
+using PlatformService.Persistence.Models;
+using PlatformService.Persistence.Repositories.Abstractions;
+using PlatformService.Persistence.Repositories.Repositories;
 
 namespace PlatformService.Infrastructure
 {
@@ -11,7 +14,9 @@ namespace PlatformService.Infrastructure
         {
             return services
                 .AddDatabase(configuration)
-                .AddServices();
+                .AddServices()
+                .AddUnitOfWork()
+                .AddRepositories();
         }
 
 
@@ -26,13 +31,31 @@ namespace PlatformService.Infrastructure
             return services;
         }
 
-        
+
         private static IServiceCollection AddServices(
             this IServiceCollection services)
         {
             // ...
 
             return services;
+        }
+
+
+        private static IServiceCollection AddUnitOfWork(
+            this IServiceCollection services)
+        {
+            return services
+                .AddScoped<IAsyncUnitOfWork<ApplicationDbContext>, AsyncUnitOfWork<ApplicationDbContext>>();
+        }
+
+
+        private static IServiceCollection AddRepositories(
+            this IServiceCollection services)
+        {
+            return services
+                .AddScoped<IAsyncReadOnlyRepository<Platform>, AsyncReadOnlyRepository<Platform>>()
+                .AddScoped<IDeletionRepository<Platform>, DeletionRepository<Platform>>()
+                .AddScoped<IInsertionRepository<Platform>, InsertionRepository<Platform>>();
         }
     }
 }

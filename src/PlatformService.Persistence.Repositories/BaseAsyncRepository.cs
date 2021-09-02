@@ -1,12 +1,12 @@
 ﻿
 namespace PlatformService.Persistence.Repositories
 {
-    public abstract class BaseRepository<TEntity>
+    public abstract class BaseAsyncRepository<TEntity>
         where TEntity : class
     {
         protected readonly ApplicationDbContext ApplicationDbContext;
 
-        protected BaseRepository(ApplicationDbContext applicationDbContext)
+        protected BaseAsyncRepository(ApplicationDbContext applicationDbContext)
             =>
             ApplicationDbContext = applicationDbContext;
     }
