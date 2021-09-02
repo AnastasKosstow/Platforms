@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using System.Threading.Tasks;
 
-namespace PlatformService
+namespace PlatformService.StartUp
 {
     public class Program
     {
@@ -10,7 +10,6 @@ namespace PlatformService
             => await CreateHostBuilder(args)
                 .Build()
                 .RunAsync();
-        
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)

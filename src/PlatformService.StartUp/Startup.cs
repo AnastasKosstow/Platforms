@@ -3,8 +3,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PlatformService.Application;
+using PlatformService.Infrastructure;
+using PlatformService.Web;
 
-namespace PlatformService
+namespace PlatformService.StartUp
 {
     public class Startup
     {
@@ -17,6 +20,11 @@ namespace PlatformService
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services
+                .AddApplication(Configuration)
+                .AddInfrastructure(Configuration)
+                .AddWebComponents();
+
             services.AddControllers();
         }
 
@@ -29,11 +37,10 @@ namespace PlatformService
 
             app.UseHttpsRedirection()
                .UseRouting()
-               .UseAuthorization()
                .UseEndpoints(endpoints =>
-                {
-                    endpoints.MapControllers();
-                });
+               {
+                   endpoints.MapControllers();
+               });
         }
     }
 }
