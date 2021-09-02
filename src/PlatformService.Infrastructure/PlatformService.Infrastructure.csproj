@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PlatformService.Persistence.Repositories\PlatformService.Persistence.Repositories.csproj" />
     <ProjectReference Include="..\PlatformService.Persistence\PlatformService.Persistence.csproj" />
   </ItemGroup>
 

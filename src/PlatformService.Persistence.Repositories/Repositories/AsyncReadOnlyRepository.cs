@@ -16,7 +16,7 @@ namespace PlatformService.Persistence.Repositories.Repositories
         {
         }
 
-        public async Task<TEntity[]> Find(Expression<Func<TEntity, bool>> filter, CancellationToken cancellationToken)
+        public virtual async Task<TEntity[]> Find(Expression<Func<TEntity, bool>> filter, CancellationToken cancellationToken)
         {
             return await ApplicationDbContext
                 .Set<TEntity>()
@@ -24,7 +24,7 @@ namespace PlatformService.Persistence.Repositories.Repositories
                 .ToArrayAsync(cancellationToken);
         }
 
-        public async Task<TEntity> GetSingle(Expression<Func<TEntity, bool>> filter, CancellationToken cancellationToken)
+        public virtual async Task<TEntity> GetSingle(Expression<Func<TEntity, bool>> filter, CancellationToken cancellationToken)
         {
             return await ApplicationDbContext
                 .Set<TEntity>()
