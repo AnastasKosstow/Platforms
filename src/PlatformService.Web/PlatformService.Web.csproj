@@ -9,4 +9,10 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.9" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PlatformService.Persistence.Repositories\PlatformService.Persistence.Repositories.csproj" />
+    <ProjectReference Include="..\PlatformService.Persistence.UnitOfWork\PlatformService.Persistence.UnitOfWork.csproj" />
+    <ProjectReference Include="..\PlatformService.Persistence\PlatformService.Persistence.csproj" />
+  </ItemGroup>
+
 </Project>

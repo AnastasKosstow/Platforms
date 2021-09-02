@@ -1,18 +1,17 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace PlatformService.Web.Controllers
 {
     public class HomeController : ApiController
     {
-        public HomeController()
-        {
-        }
-
         // HomeController
         // ONLY FOR TESTING!
 
         [HttpGet]
-        public IActionResult Get()
-            => Ok("Work!");
+        public async Task<IActionResult> TEST()
+        {
+            return Ok();
+        }
     }
 }

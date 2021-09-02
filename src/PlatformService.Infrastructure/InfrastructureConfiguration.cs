@@ -5,6 +5,7 @@ using PlatformService.Persistence;
 using PlatformService.Persistence.Models;
 using PlatformService.Persistence.Repositories.Abstractions;
 using PlatformService.Persistence.Repositories.Repositories;
+using PlatformService.Persistence.UnitOfWork;
 
 namespace PlatformService.Infrastructure
 {
