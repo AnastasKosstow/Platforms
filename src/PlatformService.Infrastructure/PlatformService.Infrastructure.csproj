@@ -5,11 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Mapster" Version="7.2.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PlatformService.Application\PlatformService.Application.csproj" />
     <ProjectReference Include="..\PlatformService.Persistence.Repositories\PlatformService.Persistence.Repositories.csproj" />
     <ProjectReference Include="..\PlatformService.Persistence.UnitOfWork\PlatformService.Persistence.UnitOfWork.csproj" />
     <ProjectReference Include="..\PlatformService.Persistence\PlatformService.Persistence.csproj" />

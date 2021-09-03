@@ -10,7 +10,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
+    <Folder Include="Models\Delete\" />
+    <Folder Include="Models\Post\" />
   </ItemGroup>
 
 </Project>

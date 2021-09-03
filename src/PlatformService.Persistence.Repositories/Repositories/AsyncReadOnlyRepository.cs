@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PlatformService.Persistence.Repositories.Abstractions;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
@@ -14,6 +15,13 @@ namespace PlatformService.Persistence.Repositories.Repositories
         public AsyncReadOnlyRepository(ApplicationDbContext applicationDbContext)
             : base(applicationDbContext)
         {
+        }
+
+        public virtual async Task<IEnumerable<TEntity>> All(CancellationToken cancellationToken)
+        {
+            return await ApplicationDbContext
+                .Set<TEntity>()
+                .ToArrayAsync(cancellationToken);
         }
 
         public virtual async Task<TEntity[]> Find(Expression<Func<TEntity, bool>> filter, CancellationToken cancellationToken)
