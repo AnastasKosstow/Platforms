@@ -1,7 +1,7 @@
-﻿using PlatformService.Application.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using PlatformService.Application.Models;
 
 namespace PlatformService.Infrastructure.Services
 {

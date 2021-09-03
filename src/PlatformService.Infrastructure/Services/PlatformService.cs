@@ -1,11 +1,11 @@
-﻿using Mapster;
-using PlatformService.Application.Models;
-using PlatformService.Persistence.Models;
-using PlatformService.Persistence.Repositories.Abstractions;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using PlatformService.Application.Models;
+using PlatformService.Persistence.Models;
+using PlatformService.Persistence.Repositories.Abstractions;
+using Mapster;
 
 namespace PlatformService.Infrastructure.Services
 {
