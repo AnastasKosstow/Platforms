@@ -2,9 +2,11 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using PlatformService.Application.Models;
+using PlatformService.Application.Models.Get;
 using PlatformService.Persistence.Models;
 using PlatformService.Persistence.Repositories.Abstractions;
+using PlatformService.Infrastructure.Validation;
+using PlatformService.Infrastructure.Exceptions;
 using Mapster;
 
 namespace PlatformService.Infrastructure.Services
@@ -24,6 +26,16 @@ namespace PlatformService.Infrastructure.Services
             return (await _readOnlyRepository
                 .All(cancellationToken))
                 .Select(platform => platform.Adapt<GetPlatformsSuccessModel>());
+        }
+
+        public async Task<GetPlatformsSuccessModel> GetById(GetPlatformsRequestModel requestModel, CancellationToken cancellationToken)
+        {
+            Guard.AgainstInvalidModel<GetPlatformsRequestModel, InvalidRequestModelException>(requestModel);
+
+            return (await _readOnlyRepository
+                .Find(platform => platform.Id == requestModel.Id, cancellationToken))
+                .Select(platform => platform.Adapt<GetPlatformsSuccessModel>())
+                .FirstOrDefault();
         }
     }
 }

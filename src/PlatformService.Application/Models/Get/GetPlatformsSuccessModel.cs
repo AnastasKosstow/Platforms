@@ -1,7 +1,7 @@
 ﻿
-namespace PlatformService.Application.Models
+namespace PlatformService.Application.Models.Get
 {
-    public record GetPlatformsSuccessModel
+    public class GetPlatformsSuccessModel
     {
         public string Name { get; set; }
 
