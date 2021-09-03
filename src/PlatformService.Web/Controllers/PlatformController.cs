@@ -1,8 +1,11 @@
-﻿using PlatformService.Application.Models.Get;
-using PlatformService.Infrastructure.Services;
-using System.Collections.Generic;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using PlatformService.Application.Models.Delete;
+using PlatformService.Application.Models.Get;
+using PlatformService.Application.Models.Post;
+using PlatformService.Application.Models.Put;
+using PlatformService.Infrastructure.Services;
 
 namespace PlatformService.Web.Controllers
 {
@@ -15,17 +18,38 @@ namespace PlatformService.Web.Controllers
             _platformService = platformService;
         
 
-        public async Task<IEnumerable<GetPlatformsSuccessModel>> GetPlatforms(CancellationToken cancellationToken)
+        [HttpGet]
+        public async Task<GetPlatformsSuccessModel> GetPlatforms(
+            CancellationToken cancellationToken)
         {
-            return await _platformService.GetAll(cancellationToken);
+            return await _platformService.Get(cancellationToken);
         }
 
 
-        public async Task<GetPlatformsSuccessModel> GetPlatformById(
-            GetPlatformsRequestModel requestModel, 
+        [HttpPost]
+        public async Task<CreatePlatformSuccessModel> CreatePlatform(
+            CreatePlatformRequestModel requestModel,
             CancellationToken cancellationToken)
         {
-            return await _platformService.GetById(requestModel, cancellationToken);
+            return await _platformService.Create(requestModel, cancellationToken);
+        }
+
+
+        [HttpPut]
+        public async Task<UpdatePlatformSuccessModel> UpdatePlatform(
+            UpdatePlatformRequestModel requestModel,
+            CancellationToken cancellationToken)
+        {
+            return await _platformService.Update(requestModel, cancellationToken);
+        }
+
+
+        [HttpDelete]
+        public async Task<DeletePlatformSuccessModel> DeletePlatform(
+            DeletePlatformRequestModel requestModel,
+            CancellationToken cancellationToken)
+        {
+            return await _platformService.Delete(requestModel, cancellationToken);
         }
     }
 }
