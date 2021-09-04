@@ -65,16 +65,6 @@ namespace PlatformService.Infrastructure.Services
         }
 
 
-        public async Task<UpdatePlatformSuccessModel> Update(
-            UpdatePlatformRequestModel requestModel, 
-            CancellationToken cancellationToken)
-        {
-            Guard.AgainstInvalidModel<UpdatePlatformRequestModel, InvalidRequestModelException>(requestModel);
-
-            throw new System.NotImplementedException();
-        }
-
-
         public async Task<DeletePlatformSuccessModel> Delete(
             DeletePlatformRequestModel requestModel, 
             CancellationToken cancellationToken)
