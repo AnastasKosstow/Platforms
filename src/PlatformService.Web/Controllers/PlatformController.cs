@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using PlatformService.Application.Models.Delete;
 using PlatformService.Application.Models.Get;
 using PlatformService.Application.Models.Post;
-using PlatformService.Application.Models.Put;
 using PlatformService.Infrastructure.Services;
 
 namespace PlatformService.Web.Controllers
@@ -32,15 +31,6 @@ namespace PlatformService.Web.Controllers
             CancellationToken cancellationToken)
         {
             return await _platformService.Create(requestModel, cancellationToken);
-        }
-
-
-        [HttpPut]
-        public async Task<UpdatePlatformSuccessModel> UpdatePlatform(
-            UpdatePlatformRequestModel requestModel,
-            CancellationToken cancellationToken)
-        {
-            return await _platformService.Update(requestModel, cancellationToken);
         }
 
 

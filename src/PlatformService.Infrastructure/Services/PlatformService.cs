@@ -5,34 +5,22 @@ using System.Threading.Tasks;
 using PlatformService.Application.Models.Delete;
 using PlatformService.Application.Models.Get;
 using PlatformService.Application.Models.Post;
-using PlatformService.Application.Models.Put;
 using PlatformService.Infrastructure.Validation;
 using PlatformService.Infrastructure.Exceptions;
-using PlatformService.Persistence;
 using PlatformService.Persistence.Models;
-using PlatformService.Persistence.Repositories.Abstractions;
-using PlatformService.Persistence.UnitOfWork;
+using PlatformService.Persistence.Repositories;
 using Mapster;
 
 namespace PlatformService.Infrastructure.Services
 {
     public class PlatformService : IPlatformService
     {
-        private readonly IAsyncReadOnlyRepository<Platform> _readOnlyRepository;
-        private readonly IDeletionRepository<Platform> _deletionRepository;
-        private readonly IInsertionRepository<Platform> _insertionRepository;
-        private readonly IAsyncUnitOfWork<ApplicationDbContext> _unitOfWork;
+        private readonly IAsyncRepository<Platform> _asyncRepository;
 
         public PlatformService(
-            IAsyncReadOnlyRepository<Platform> readOnlyRepository,
-            IDeletionRepository<Platform> deletionRepository,
-            IInsertionRepository<Platform> insertionRepository,
-            IAsyncUnitOfWork<ApplicationDbContext> unitOfWork)
+            IAsyncRepository<Platform> asyncRepository)
         {
-            _readOnlyRepository = readOnlyRepository;
-            _deletionRepository = deletionRepository;
-            _insertionRepository = insertionRepository;
-            _unitOfWork = unitOfWork;
+            _asyncRepository = asyncRepository;
         }
 
         
@@ -40,7 +28,7 @@ namespace PlatformService.Infrastructure.Services
             CancellationToken cancellationToken)
         {
             IEnumerable<PlatformModel> platforms = 
-                (await _readOnlyRepository.All(cancellationToken))
+                (await _asyncRepository.All(cancellationToken))
                 .Select(platform => platform.Adapt<PlatformModel>());
 
             return new GetPlatformsSuccessModel(platforms);
@@ -53,11 +41,11 @@ namespace PlatformService.Infrastructure.Services
         {
             Guard.AgainstInvalidModel<CreatePlatformRequestModel, InvalidRequestModelException>(requestModel);
 
-            var platform = _insertionRepository
+            var platform = _asyncRepository
                 .Add(requestModel.Adapt<Platform>());
             if (platform != null)
             {
-                await _unitOfWork.CompleteAsync(cancellationToken);
+                await _asyncRepository.CompleteAsync(cancellationToken);
             }
 
             return await Task.FromResult(
@@ -71,10 +59,10 @@ namespace PlatformService.Infrastructure.Services
         {
             Guard.AgainstInvalidModel<DeletePlatformRequestModel, InvalidRequestModelException>(requestModel);
 
-            var isDeleted = _deletionRepository.Remove(requestModel.Adapt<Platform>());
+            var isDeleted = _asyncRepository.Remove(requestModel.Adapt<Platform>());
             if (isDeleted)
             {
-                await _unitOfWork.CompleteAsync(cancellationToken);
+                await _asyncRepository.CompleteAsync(cancellationToken);
             }
 
             return await Task.FromResult(
