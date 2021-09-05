@@ -5,7 +5,6 @@ using PlatformService.Infrastructure.Services;
 using PlatformService.Persistence;
 using PlatformService.Persistence.Models;
 using PlatformService.Persistence.Repositories;
-using PlatformService.Persistence.Repositories.Abstractions;
 
 namespace PlatformService.Infrastructure
 {
@@ -16,7 +15,7 @@ namespace PlatformService.Infrastructure
             return services
                 .AddDatabase(configuration)
                 .AddServices()
-                .AddRepositories();
+                .AddRepository();
         }
 
 
@@ -40,7 +39,7 @@ namespace PlatformService.Infrastructure
         }
 
 
-        private static IServiceCollection AddRepositories(
+        private static IServiceCollection AddRepository(
             this IServiceCollection services)
         {
             return services

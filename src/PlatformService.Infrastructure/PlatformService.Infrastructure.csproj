@@ -13,7 +13,6 @@
   <ItemGroup>
     <ProjectReference Include="..\PlatformService.Application\PlatformService.Application.csproj" />
     <ProjectReference Include="..\PlatformService.Persistence.Repositories\PlatformService.Persistence.Repositories.csproj" />
-    <ProjectReference Include="..\PlatformService.Persistence.UnitOfWork\PlatformService.Persistence.UnitOfWork.csproj" />
     <ProjectReference Include="..\PlatformService.Persistence\PlatformService.Persistence.csproj" />
   </ItemGroup>
 
