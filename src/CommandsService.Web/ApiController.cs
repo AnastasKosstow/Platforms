@@ -3,7 +3,7 @@
 namespace CommandsService.Web
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/command/[controller]")]
     public abstract class ApiController : ControllerBase
     {
     }
