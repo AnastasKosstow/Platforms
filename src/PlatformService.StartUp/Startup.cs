@@ -24,8 +24,6 @@ namespace PlatformService.StartUp
                 .AddApplication(Configuration)
                 .AddInfrastructure(Configuration)
                 .AddWebComponents();
-
-            services.AddControllers();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
