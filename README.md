@@ -24,3 +24,9 @@
     </li>
   </ol>
 </details>
+
+
+<!-- ABOUT THE PROJECT -->
+## About The Project
+Platforms is a simple project that stores basic information about different dev tools and platforms.
+The purpose of the project is to test different technologies, tools and frameworks like gRPC.
