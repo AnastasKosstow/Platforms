@@ -22,6 +22,5 @@
         <li><a href="#sb">Service Bus</a></li>
       </ul>
     </li>
-    <li>
   </ol>
 </details>
