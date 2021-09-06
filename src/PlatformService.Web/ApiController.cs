@@ -3,7 +3,7 @@
 namespace PlatformService.Web
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/platform/[controller]")]
     public abstract class ApiController : ControllerBase
     {
     }

@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace CommandsService.Web.Controllers
 {
@@ -9,10 +8,12 @@ namespace CommandsService.Web.Controllers
         {
         }
 
+        [HttpPost]
         public IActionResult TestInboundConnection()
         {
             System.Console.WriteLine("--> Inbound POST # Command Service");
-            return Ok();
+
+            return Ok("Inbound TEST --> Platforms Controller");
         }
     }
 }
