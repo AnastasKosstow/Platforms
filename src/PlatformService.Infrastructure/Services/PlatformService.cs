@@ -9,6 +9,7 @@ using PlatformService.Infrastructure.Validation;
 using PlatformService.Infrastructure.Exceptions;
 using PlatformService.Persistence.Models;
 using PlatformService.Persistence.Repositories;
+using PlatformService.Messaging;
 using Mapster;
 
 namespace PlatformService.Infrastructure.Services
@@ -16,11 +17,14 @@ namespace PlatformService.Infrastructure.Services
     public class PlatformService : IPlatformService
     {
         private readonly IAsyncRepository<Platform> _asyncRepository;
+        private readonly ICommandDataClient _commandDataClient;
 
         public PlatformService(
-            IAsyncRepository<Platform> asyncRepository)
+            IAsyncRepository<Platform> asyncRepository,
+            ICommandDataClient commandDataClient)
         {
             _asyncRepository = asyncRepository;
+            _commandDataClient = commandDataClient;
         }
 
         
@@ -46,6 +50,15 @@ namespace PlatformService.Infrastructure.Services
             if (platform != null)
             {
                 await _asyncRepository.CompleteAsync(cancellationToken);
+            }
+
+            try
+            {
+                await _commandDataClient.SendPlatformToCommand(platform);
+            }
+            catch(System.Exception ex)
+            {
+                throw new System.InvalidOperationException(ex.Message);
             }
 
             return await Task.FromResult(

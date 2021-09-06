@@ -1,3 +1,4 @@
+using CommandsService.Web;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -17,7 +18,7 @@ namespace CommandsService.StartUp
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddWebComponents();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
