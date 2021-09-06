@@ -31,9 +31,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Commands", "Commands", "{72
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{FDC38CA4-8B71-4E24-964D-445ED18A589E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandsService.StartUp", "CommandsService.StartUp\CommandsService.StartUp.csproj", "{F20FE97D-44C2-44F9-B9C6-E9C67DFD89B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommandsService.StartUp", "CommandsService.StartUp\CommandsService.StartUp.csproj", "{F20FE97D-44C2-44F9-B9C6-E9C67DFD89B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandsService.Web", "CommandsService.Web\CommandsService.Web.csproj", "{C59BD0BF-D9EA-4C7D-BF1A-609B71174601}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommandsService.Web", "CommandsService.Web\CommandsService.Web.csproj", "{C59BD0BF-D9EA-4C7D-BF1A-609B71174601}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Messaging", "Messaging", "{B720B991-9EC1-4599-99B6-FD7D19455F68}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformService.Messaging", "PlatformService.Messaging\PlatformService.Messaging.csproj", "{0DC1F7E6-6F11-46EE-9425-85B28A19F983}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +77,10 @@ Global
 		{C59BD0BF-D9EA-4C7D-BF1A-609B71174601}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C59BD0BF-D9EA-4C7D-BF1A-609B71174601}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C59BD0BF-D9EA-4C7D-BF1A-609B71174601}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DC1F7E6-6F11-46EE-9425-85B28A19F983}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DC1F7E6-6F11-46EE-9425-85B28A19F983}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DC1F7E6-6F11-46EE-9425-85B28A19F983}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DC1F7E6-6F11-46EE-9425-85B28A19F983}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -93,6 +101,8 @@ Global
 		{FDC38CA4-8B71-4E24-964D-445ED18A589E} = {728337CA-0EAD-4D8C-B10E-08EE5A70B318}
 		{F20FE97D-44C2-44F9-B9C6-E9C67DFD89B1} = {FDC38CA4-8B71-4E24-964D-445ED18A589E}
 		{C59BD0BF-D9EA-4C7D-BF1A-609B71174601} = {FDC38CA4-8B71-4E24-964D-445ED18A589E}
+		{B720B991-9EC1-4599-99B6-FD7D19455F68} = {3677F366-5ACA-49AC-8D17-3DE1C880746E}
+		{0DC1F7E6-6F11-46EE-9425-85B28A19F983} = {B720B991-9EC1-4599-99B6-FD7D19455F68}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {33588E92-87CB-43F3-A2A4-4A550566404F}
