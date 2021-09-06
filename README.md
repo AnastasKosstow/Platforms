@@ -19,7 +19,7 @@
         <li><a href="#databases">Databases</a></li>
       </ul>
       <ul>
-        <li><a href="#sb">Service Bus</a></li>
+        <li><a href="#service-bus">Service Bus</a></li>
       </ul>
       <ul>
         <li><a href="#containerization-and-orchestration">Containerization and Orchestration</a></li>
