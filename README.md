@@ -16,10 +16,13 @@
         <li><a href="#architecture">Architecture</a></li>
       </ul>
       <ul>
-        <li><a href="#db">Databases</a></li>
+        <li><a href="#databases">Databases</a></li>
       </ul>
       <ul>
         <li><a href="#sb">Service Bus</a></li>
+      </ul>
+      <ul>
+        <li><a href="#containerization-and-orchestration">Containerization and Orchestration</a></li>
       </ul>
     </li>
   </ol>
@@ -36,8 +39,28 @@ The purpose of the project is to test different technologies, tools and framewor
 
 Technologies, tools and frameworks:
 
+
 ### Architecture
 
 Microservices Architecture:
   - Platform Service
   - Command Service
+
+
+### Databases
+
+  - Platform Service - MSSQL
+  - Command Service - MongoDB
+
+
+### Service Bus
+
+  - RabbitMQ
+
+
+### Containerization and Orchestration
+
+  - Docker
+  - Kubernetes
+
+
