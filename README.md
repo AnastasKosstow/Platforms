@@ -11,9 +11,9 @@
   <ol>
     <li><a href="#about-the-project">About The Project</a></li>
     <li>
-      <a href="#build">Build With</a>
+      <a href="#build-with">Build With</a>
       <ul>
-        <li><a href="#arch">Architecture</a></li>
+        <li><a href="#architecture">Architecture</a></li>
       </ul>
       <ul>
         <li><a href="#db">Databases</a></li>
@@ -30,3 +30,14 @@
 ## About The Project
 Platforms is a simple project that stores basic information about different dev tools and platforms.
 The purpose of the project is to test different technologies, tools and frameworks like gRPC.
+
+<!-- BUILD WITH -->
+## Build With
+
+Technologies, tools and frameworks:
+
+### Architecture
+
+Microservices Architecture:
+  - Platform Service
+  - Command Service
