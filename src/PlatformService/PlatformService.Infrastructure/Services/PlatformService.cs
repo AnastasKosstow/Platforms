@@ -45,6 +45,19 @@ namespace PlatformService.Infrastructure.Services
         {
             Guard.AgainstInvalidModel<CreatePlatformRequestModel, InvalidRequestModelException>(requestModel);
 
+
+            var platform1 = new Platform();
+            try
+            {
+                await _commandDataClient.SendPlatformToCommand(platform1);
+            }
+            catch(System.Exception ex)
+            {
+                throw new System.InvalidOperationException(ex.Message);
+            }
+
+
+
             var platform = _asyncRepository
                 .Add(requestModel.Adapt<Platform>());
             if (platform != null)
