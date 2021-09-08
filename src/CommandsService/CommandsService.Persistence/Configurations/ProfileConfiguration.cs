@@ -8,7 +8,10 @@ namespace PlatformService.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<Platform> builder)
         {
-            
+            builder
+                .HasMany(x => x.Commands)
+                .WithOne(x => x.Platform!)
+                .HasForeignKey(x => x.PlatformId);
         }
     }
 }

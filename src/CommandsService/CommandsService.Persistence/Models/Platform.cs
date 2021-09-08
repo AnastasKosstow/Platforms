@@ -10,6 +10,6 @@ namespace CommandsService.Persistence.Models
 
         public string Name { get; set; }
 
-        ICollection<Command> Commands { get; set; }
+        public ICollection<Command> Commands { get; set; }
     }
 }
