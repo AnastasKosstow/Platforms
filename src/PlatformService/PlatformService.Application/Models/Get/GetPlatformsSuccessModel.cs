@@ -2,7 +2,7 @@
 
 namespace PlatformService.Application.Models.Get
 {
-    public class GetPlatformsSuccessModel
+    public record GetPlatformsSuccessModel
     {
         public GetPlatformsSuccessModel(IEnumerable<PlatformModel> platforms)
         {
@@ -11,7 +11,7 @@ namespace PlatformService.Application.Models.Get
         public IEnumerable<PlatformModel> Platforms { get; set; }
     }
 
-    public class PlatformModel
+    public record PlatformModel
     {
         public string Name { get; set; }
 

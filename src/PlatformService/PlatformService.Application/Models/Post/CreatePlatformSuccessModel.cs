@@ -1,7 +1,7 @@
 ﻿
 namespace PlatformService.Application.Models.Post
 {
-    public class CreatePlatformSuccessModel
+    public record CreatePlatformSuccessModel
     {
         public int Id { get; set; }
 

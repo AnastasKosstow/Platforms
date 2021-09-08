@@ -1,7 +1,7 @@
 ﻿
 namespace PlatformService.Application.Models.Delete
 {
-    public class  DeletePlatformSuccessModel
+    public record DeletePlatformSuccessModel
     {
         public DeletePlatformSuccessModel(bool isDeleted)
         {

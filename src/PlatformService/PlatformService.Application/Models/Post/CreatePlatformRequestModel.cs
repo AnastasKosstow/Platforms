@@ -1,7 +1,7 @@
 ﻿
 namespace PlatformService.Application.Models.Post
 {
-    public class  CreatePlatformRequestModel
+    public record CreatePlatformRequestModel
     {
         public string Name { get; set; }
 
