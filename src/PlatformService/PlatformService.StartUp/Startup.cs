@@ -11,18 +11,20 @@ namespace PlatformService.StartUp
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Configuration = configuration;
+            _environment = environment;
         }
 
         public IConfiguration Configuration { get; }
+        private readonly IWebHostEnvironment _environment;
 
         public void ConfigureServices(IServiceCollection services)
         {
             services
                 .AddApplication(Configuration)
-                .AddInfrastructure(Configuration)
+                .AddInfrastructure(Configuration, _environment.IsProduction())
                 .AddWebComponents();
         }
 

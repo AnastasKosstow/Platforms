@@ -12,10 +12,13 @@ namespace PlatformService.Infrastructure
 {
     public static class InfrastructureConfiguration
     {
-        public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddInfrastructure(
+            this IServiceCollection services, 
+            IConfiguration configuration, 
+            bool isProduction)
         {
             return services
-                .AddDatabase(configuration)
+                .AddDatabase(configuration, isProduction)
                 .AddServices()
                 .AddRepository()
                 .AddHttpClient();
@@ -24,11 +27,16 @@ namespace PlatformService.Infrastructure
 
         private static IServiceCollection AddDatabase(
             this IServiceCollection services,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            bool isProduction)
         {
+            string connectionString = (isProduction)
+                ? connectionString = configuration.GetConnectionString("KubernetesConnection")
+                : connectionString = configuration.GetConnectionString("LocalConnection");
+
             services.AddDbContext<ApplicationDbContext>(
                 options => 
-                    options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+                    options.UseSqlServer(connectionString));
 
             return services;
         }
