@@ -4,7 +4,7 @@ using PlatformService.Persistence.Models;
 
 namespace PlatformService.Persistence.Configurations
 {
-    public class ProfileConfiguration : IEntityTypeConfiguration<Platform>
+    public class PlatformConfiguration : IEntityTypeConfiguration<Platform>
     {
         public void Configure(EntityTypeBuilder<Platform> builder)
         {
