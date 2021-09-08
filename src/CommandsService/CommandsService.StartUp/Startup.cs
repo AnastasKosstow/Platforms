@@ -1,9 +1,11 @@
-using CommandsService.Web;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using CommandsService.Application;
+using CommandsService.Infrastructure;
+using CommandsService.Web;
 
 namespace CommandsService.StartUp
 {
@@ -18,7 +20,10 @@ namespace CommandsService.StartUp
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddWebComponents();
+            services
+                .AddApplication(Configuration)
+                .AddInfrastructure(Configuration)
+                .AddWebComponents();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
