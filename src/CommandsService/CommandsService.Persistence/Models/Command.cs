@@ -1,8 +1,7 @@
-﻿using CommandsService.Persistence.Abstractions;
-
+﻿
 namespace CommandsService.Persistence.Models
 {
-    public record Command : IPersistenceModel
+    public record Command
     {
         public int Id { get; set; }
 

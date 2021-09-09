@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using CommandsService.Persistence.Abstractions;
 
 namespace CommandsService.Persistence.Models
 {
-    public record Platform : IPersistenceModel
+    public record Platform
     {
         public int Id { get; set; }
         
