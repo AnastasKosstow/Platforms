@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using CommandsService.Persistence;
 using CommandsService.Persistence.Models;
 using CommandsService.Persistence.Repositories;
+using CommandsService.Infrastructure.Services;
 
 namespace CommandsService.Infrastructure
 {
@@ -15,6 +16,7 @@ namespace CommandsService.Infrastructure
         {
             return services
                 .AddDatabase(configuration)
+                .AddServices()
                 .AddRepository();
         }
 
@@ -28,6 +30,15 @@ namespace CommandsService.Infrastructure
                     options.UseSqlServer(configuration.GetConnectionString("LocalConnection")));
 
             return services;
+        }
+
+
+        private static IServiceCollection AddServices(
+            this IServiceCollection services)
+        {
+            return services
+                .AddScoped<ICommandService, CommandService>()
+                .AddScoped<IPlatformService, PlatformService>();
         }
 
 

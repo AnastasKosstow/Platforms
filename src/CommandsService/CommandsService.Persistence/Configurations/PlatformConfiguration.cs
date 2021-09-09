@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using CommandsService.Persistence.Models;
 
-namespace PlatformService.Persistence.Configurations
+namespace CommandsService.Persistence.Configurations
 {
     public class PlatformConfiguration : IEntityTypeConfiguration<Platform>
     {

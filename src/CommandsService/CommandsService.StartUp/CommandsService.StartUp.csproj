@@ -5,6 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CommandsService.Application\CommandsService.Application.csproj" />
+    <ProjectReference Include="..\CommandsService.Infrastructure\CommandsService.Infrastructure.csproj" />
     <ProjectReference Include="..\CommandsService.Web\CommandsService.Web.csproj" />
   </ItemGroup>
 
