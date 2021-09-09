@@ -1,19 +1,23 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using CommandsService.Application.Models.Get;
+using CommandsService.Infrastructure.Services;
 
 namespace CommandsService.Web.Controllers
 {
     public class PlatformsController : ApiController
     {
-        public PlatformsController()
-        {
-        }
+        private readonly IPlatformService _platformService;
 
-        [HttpPost]
-        public IActionResult TestInboundConnection()
-        {
-            System.Console.WriteLine("--> Inbound POST # Command Service");
+        public PlatformsController(IPlatformService platformService)
+            =>
+            _platformService = platformService;
+        
 
-            return Ok("Inbound TEST --> Platforms Controller");
-        }
+        [HttpGet]
+        public async Task<GetAllPlatformsSuccessModel> GetAll(CancellationToken cancellationToken)
+            =>
+            await _platformService.GetAll(cancellationToken);
     }
 }

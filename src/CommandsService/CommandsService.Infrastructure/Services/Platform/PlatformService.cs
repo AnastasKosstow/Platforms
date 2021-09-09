@@ -1,5 +1,11 @@
-﻿using CommandsService.Persistence.Models;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using CommandsService.Application.Models.Get;
+using CommandsService.Persistence.Models;
 using CommandsService.Persistence.Repositories;
+using Mapster;
 
 namespace CommandsService.Infrastructure.Services
 {
@@ -8,6 +14,15 @@ namespace CommandsService.Infrastructure.Services
         public PlatformService(IAsyncRepository<Platform> asyncPlatformRepository)
             : base(asyncPlatformRepository)
         {
+        }
+
+        public async Task<GetAllPlatformsSuccessModel> GetAll(CancellationToken cancellationToken)
+        {
+            IEnumerable<PlatformModel> platforms =
+                (await _asyncRepository.GetAll(cancellationToken))
+                .Select(platform => platform.Adapt<PlatformModel>());
+
+            return new GetAllPlatformsSuccessModel(platforms);
         }
     }
 }

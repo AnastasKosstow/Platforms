@@ -14,20 +14,15 @@ using Mapster;
 
 namespace PlatformService.Infrastructure.Services
 {
-    public class PlatformService : IPlatformService
+    public class PlatformService : BaseService<Platform>, IPlatformService
     {
-        private readonly IAsyncRepository<Platform> _asyncRepository;
-        private readonly ICommandDataClient _commandDataClient;
-
         public PlatformService(
             IAsyncRepository<Platform> asyncRepository,
             ICommandDataClient commandDataClient)
+            : base(asyncRepository, commandDataClient)
         {
-            _asyncRepository = asyncRepository;
-            _commandDataClient = commandDataClient;
         }
 
-        
         public async Task<GetPlatformsSuccessModel> Get(
             CancellationToken cancellationToken)
         {
@@ -44,19 +39,6 @@ namespace PlatformService.Infrastructure.Services
             CancellationToken cancellationToken)
         {
             Guard.AgainstInvalidModel<CreatePlatformRequestModel, InvalidRequestModelException>(requestModel);
-
-
-            var platform1 = new Platform();
-            try
-            {
-                await _commandDataClient.SendPlatformToCommand(platform1);
-            }
-            catch(System.Exception ex)
-            {
-                throw new System.InvalidOperationException(ex.Message);
-            }
-
-
 
             var platform = _asyncRepository
                 .Add(requestModel.Adapt<Platform>());

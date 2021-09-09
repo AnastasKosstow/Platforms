@@ -1,8 +1,11 @@
-﻿using CommandsService.Persistence.Models;
+﻿using CommandsService.Application.Models.Get;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace CommandsService.Infrastructure.Services
 {
-    public interface IPlatformService : IBaseService<Platform>
+    public interface IPlatformService
     {
+        Task<GetAllPlatformsSuccessModel> GetAll(CancellationToken cancellationToken);
     }
 }
