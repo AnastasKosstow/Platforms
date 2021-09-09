@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CommandsService.Infrastructure.Guard
+namespace CommandsService.Infrastructure.Validation
 {
     public static class Guard
     {
