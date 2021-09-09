@@ -23,11 +23,13 @@ namespace CommandsService.Infrastructure.Services
 
         public async virtual Task<TEntity> GetSingle(int id, CancellationToken cancellationToken)
         {
+            // TODO: Guard
             return await _asyncRepository.GetSingle(entity => entity.Id == id, cancellationToken);
         }
 
         public virtual TEntity Create(TEntity entity)
         {
+            // TODO: Guard
             return _asyncRepository.Create(entity);
         }
     }

@@ -13,4 +13,8 @@
     <Folder Include="Models\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CommandsService.Infrastructure\CommandsService.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
