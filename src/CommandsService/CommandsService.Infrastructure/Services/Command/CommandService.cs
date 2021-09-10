@@ -54,13 +54,15 @@ namespace CommandsService.Infrastructure.Services
 
 
         public async Task<CreateCommandForPlatformSuccessModel> Create(
-            CreateCommandForPlatformRequestModel requestModel)
+            CreateCommandForPlatformRequestModel requestModel,
+            CancellationToken cancellationToken)
         {
             Command command = requestModel.Adapt<Command>();
 
             Guard.AgainstNullOrEmpty<Command, MissingItemsException>(command);
 
             _asyncRepository.Create(command);
+            await _asyncRepository.CompleteAsync(cancellationToken);
 
             return await Task.FromResult(
                     new CreateCommandForPlatformSuccessModel(command)

@@ -34,8 +34,9 @@ namespace CommandsService.Web.Controllers
 
         [HttpPost]
         public async Task<CreateCommandForPlatformSuccessModel> Create(
-            CreateCommandForPlatformRequestModel requestModel)
+            CreateCommandForPlatformRequestModel requestModel,
+            CancellationToken cancellationToken)
             =>
-            await _commandService.Create(requestModel);
+            await _commandService.Create(requestModel, cancellationToken);
     }
 }

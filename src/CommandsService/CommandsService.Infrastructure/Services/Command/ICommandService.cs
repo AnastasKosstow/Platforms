@@ -16,6 +16,7 @@ namespace CommandsService.Infrastructure.Services
             CancellationToken cancellationToken);
 
         Task<CreateCommandForPlatformSuccessModel> Create(
-            CreateCommandForPlatformRequestModel requestModel);
+            CreateCommandForPlatformRequestModel requestModel,
+            CancellationToken cancellationToken);
     }
 }
