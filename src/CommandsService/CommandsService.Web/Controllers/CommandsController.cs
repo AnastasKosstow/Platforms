@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using CommandsService.Application.Models.Get;
+using CommandsService.Application.Models.Post;
 using CommandsService.Infrastructure.Services;
 
 namespace CommandsService.Web.Controllers
@@ -30,5 +31,11 @@ namespace CommandsService.Web.Controllers
             =>
             await _commandService.GetSingle(requestModel, cancellationToken);
 
+
+        [HttpPost]
+        public async Task<CreateCommandForPlatformSuccessModel> Create(
+            CreateCommandForPlatformRequestModel requestModel)
+            =>
+            await _commandService.Create(requestModel);
     }
 }

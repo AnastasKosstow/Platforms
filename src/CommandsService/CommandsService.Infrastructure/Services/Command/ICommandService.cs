@@ -1,6 +1,7 @@
-﻿using CommandsService.Application.Models.Get;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
+using CommandsService.Application.Models.Get;
+using CommandsService.Application.Models.Post;
 
 namespace CommandsService.Infrastructure.Services
 {
@@ -13,5 +14,8 @@ namespace CommandsService.Infrastructure.Services
         Task<GetCommandForPlatformSuccessModel> GetSingle(
             GetCommandForPlatformRequestModel requestModel,
             CancellationToken cancellationToken);
+
+        Task<CreateCommandForPlatformSuccessModel> Create(
+            CreateCommandForPlatformRequestModel requestModel);
     }
 }

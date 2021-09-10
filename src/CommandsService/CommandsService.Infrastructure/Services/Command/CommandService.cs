@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using CommandsService.Application.Models.Get;
+using CommandsService.Application.Models.Post;
 using CommandsService.Infrastructure.Exceptions;
 using CommandsService.Infrastructure.Validation;
 using CommandsService.Persistence.Models;
@@ -49,6 +50,21 @@ namespace CommandsService.Infrastructure.Services
             Guard.AgainstNullOrEmpty<Command, MissingItemsException>(command);
 
             return command.Adapt<GetCommandForPlatformSuccessModel>();
+        }
+
+
+        public async Task<CreateCommandForPlatformSuccessModel> Create(
+            CreateCommandForPlatformRequestModel requestModel)
+        {
+            Command command = requestModel.Command.Adapt<Command>();
+
+            Guard.AgainstNullOrEmpty<Command, MissingItemsException>(command);
+
+            _asyncRepository.Create(command);
+
+            return await Task.FromResult(
+                    new CreateCommandForPlatformSuccessModel(command)
+                ); 
         }
     }
 }
