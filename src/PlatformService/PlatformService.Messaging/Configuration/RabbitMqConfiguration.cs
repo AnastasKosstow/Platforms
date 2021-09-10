@@ -5,6 +5,6 @@ namespace PlatformService.Messaging.Configuration
     {
         public string Host { get; set; }
 
-        public string Path { get; set; }
+        public string Port { get; set; }
     }
 }
