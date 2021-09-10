@@ -6,6 +6,7 @@ using CommandsService.Infrastructure.Services;
 
 namespace CommandsService.Web.Controllers
 {
+    [Route("api/c/[controller]")]
     public class PlatformsController : ApiController
     {
         private readonly IPlatformService _platformService;

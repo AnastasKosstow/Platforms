@@ -13,6 +13,15 @@ namespace CommandsService.Infrastructure.Validation
             ThrowException<TException>($"Invalid model!");
         }
 
+        public static void AgainstNullOrEmpty<TValue, TException>(TValue value)
+            where TException : BaseException, new()
+        {
+            if (value is not null)
+                return;
+
+            ThrowException<TException>($"Null or Empty!");
+        }
+
 
         private static void ThrowException<TException>(string message)
             where TException : BaseException, new()

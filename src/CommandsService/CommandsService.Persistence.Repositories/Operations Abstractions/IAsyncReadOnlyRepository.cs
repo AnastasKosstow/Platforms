@@ -10,6 +10,8 @@ namespace CommandsService.Persistence.Repositories.Abstractions
     {
         Task<IEnumerable<TEntity>> GetAll(CancellationToken cancellationToken);
 
+        Task<IEnumerable<TEntity>> GetAll(Expression<Func<TEntity, bool>> filter, CancellationToken cancellationToken);
+
         Task<TEntity> GetSingle(Expression<Func<TEntity, bool>> filter, CancellationToken cancellationToken);
     }
 }

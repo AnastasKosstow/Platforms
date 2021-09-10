@@ -23,6 +23,14 @@ namespace CommandsService.Persistence.Repositories
                 .ToListAsync(cancellationToken);
         }
 
+        public virtual async Task<IEnumerable<TEntity>> GetAll(Expression<Func<TEntity, bool>> filter, CancellationToken cancellationToken)
+        {
+            return await ApplicationDbContext
+                .Set<TEntity>()
+                .Where(filter)
+                .ToListAsync(cancellationToken);
+        }
+
         public virtual async Task<TEntity> GetSingle(Expression<Func<TEntity, bool>> filter, CancellationToken cancellationToken)
         {
             return await ApplicationDbContext
