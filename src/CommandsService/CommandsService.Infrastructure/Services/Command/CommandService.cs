@@ -56,7 +56,7 @@ namespace CommandsService.Infrastructure.Services
         public async Task<CreateCommandForPlatformSuccessModel> Create(
             CreateCommandForPlatformRequestModel requestModel)
         {
-            Command command = requestModel.Command.Adapt<Command>();
+            Command command = requestModel.Adapt<Command>();
 
             Guard.AgainstNullOrEmpty<Command, MissingItemsException>(command);
 
