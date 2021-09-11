@@ -7,21 +7,38 @@ namespace PlatformService.Messaging
 {
     public class MessageBusClient : IMessageBusClient
     {
-        private readonly RabbitMqConfiguration _rabbitMq;
+        private IConnection _connection;
+        private IModel _channel;
 
         public MessageBusClient(IOptions<RabbitMqConfiguration> rabbitMq)
-            =>
-            _rabbitMq = rabbitMq.Value;
+        {
+            var rabbitMqConfiguration = rabbitMq.Value;
+
+            var factory = new ConnectionFactory
+            {
+                HostName = rabbitMqConfiguration.RabbitMqHost,
+                Port = int.Parse(rabbitMqConfiguration.RabbitMqPort)
+            };
+
+            _connection = factory.CreateConnection();
+            _channel = _connection.CreateModel();
+
+            _channel.ExchangeDeclare(
+                exchange: "trigger",
+                type: ExchangeType.Fanout);
+
+            _connection.ConnectionShutdown += RabbitMQ_ConnectionShutdown;
+        }
+            
 
         public void Publish(PlatformPublishModel platformPublishModel)
         {
-            var factory = new ConnectionFactory
-            {
-                HostName = _rabbitMq.RabbitMqHost,
-                Port = int.Parse(_rabbitMq.RabbitMqPort)
-            };
+            
+        }
 
-
+        private void RabbitMQ_ConnectionShutdown(object sender, ShutdownEventArgs e)
+        {
+            // TODO: Shutdown Log or msg
         }
     }
 }
