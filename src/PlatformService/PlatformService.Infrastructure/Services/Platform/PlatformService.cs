@@ -17,9 +17,8 @@ namespace PlatformService.Infrastructure.Services
     public class PlatformService : BaseService<Platform>, IPlatformService
     {
         public PlatformService(
-            IAsyncRepository<Platform> asyncRepository,
-            ICommandDataClient commandDataClient)
-            : base(asyncRepository, commandDataClient)
+            IAsyncRepository<Platform> asyncRepository)
+            : base(asyncRepository)
         {
         }
 
