@@ -10,6 +10,7 @@ using PlatformService.Infrastructure.Exceptions;
 using PlatformService.Persistence.Models;
 using PlatformService.Persistence.Repositories;
 using PlatformService.Messaging;
+using PlatformService.Messaging.Models;
 using Mapster;
 
 namespace PlatformService.Infrastructure.Services
@@ -17,8 +18,9 @@ namespace PlatformService.Infrastructure.Services
     public class PlatformService : BaseService<Platform>, IPlatformService
     {
         public PlatformService(
-            IAsyncRepository<Platform> asyncRepository)
-            : base(asyncRepository)
+            IAsyncRepository<Platform> asyncRepository,
+            IMessageBusClient messageBusClient)
+            : base(asyncRepository, messageBusClient)
         {
         }
 
@@ -26,7 +28,7 @@ namespace PlatformService.Infrastructure.Services
             CancellationToken cancellationToken)
         {
             IEnumerable<PlatformModel> platforms = 
-                (await _asyncRepository.All(cancellationToken))
+                (await AsyncRepository.All(cancellationToken))
                 .Select(platform => platform.Adapt<PlatformModel>());
 
             return new GetPlatformsSuccessModel(platforms);
@@ -39,21 +41,17 @@ namespace PlatformService.Infrastructure.Services
         {
             Guard.AgainstInvalidModel<CreatePlatformRequestModel, InvalidRequestModelException>(requestModel);
 
-            var platform = _asyncRepository
+            var platform = AsyncRepository
                 .Add(requestModel.Adapt<Platform>());
             if (platform != null)
             {
-                await _asyncRepository.CompleteAsync(cancellationToken);
+                await AsyncRepository.CompleteAsync(cancellationToken);
             }
 
-            try
-            {
-                await _commandDataClient.SendPlatformToCommand(platform);
-            }
-            catch(System.Exception ex)
-            {
-                throw new System.InvalidOperationException(ex.Message);
-            }
+            var publishModel = platform.Adapt<PlatformPublishModel>();
+            publishModel.Event = "Platform_Created";
+
+            MessageBusClient.Publish(publishModel);
 
             return await Task.FromResult(
                 platform.Adapt<CreatePlatformSuccessModel>());
@@ -66,10 +64,10 @@ namespace PlatformService.Infrastructure.Services
         {
             Guard.AgainstInvalidModel<DeletePlatformRequestModel, InvalidRequestModelException>(requestModel);
 
-            var isDeleted = _asyncRepository.Remove(requestModel.Adapt<Platform>());
+            var isDeleted = AsyncRepository.Remove(requestModel.Adapt<Platform>());
             if (isDeleted)
             {
-                await _asyncRepository.CompleteAsync(cancellationToken);
+                await AsyncRepository.CompleteAsync(cancellationToken);
             }
 
             return await Task.FromResult(

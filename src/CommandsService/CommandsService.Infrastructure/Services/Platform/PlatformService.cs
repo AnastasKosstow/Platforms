@@ -24,5 +24,17 @@ namespace CommandsService.Infrastructure.Services
 
             return new GetAllPlatformsSuccessModel(platforms);
         }
+
+        public async Task<bool> ExternalPlatformExist(int externalPlatformId, CancellationToken cancellationToken)
+        {
+            var platform = await _asyncRepository.GetSingle(
+                x => x.Id == externalPlatformId, 
+                cancellationToken);
+
+            if (platform == null)
+            {
+                // throw error
+            }
+        }
     }
 }

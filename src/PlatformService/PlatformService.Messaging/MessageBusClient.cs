@@ -1,16 +1,13 @@
-﻿using Microsoft.Extensions.Options;
+﻿using System.Text.Json;
+using Microsoft.Extensions.Options;
 using PlatformService.Messaging.Configuration;
 using PlatformService.Messaging.Models;
 using RabbitMQ.Client;
-using System.Text.Json;
 
 namespace PlatformService.Messaging
 {
     public class MessageBusClient : IMessageBusClient
     {
-        private IConnection _connection;
-        private IModel _channel;
-
         private readonly RabbitMqConfiguration _rabbitMq;
 
         public MessageBusClient(IOptions<RabbitMqConfiguration> rabbitMq)
@@ -32,11 +29,11 @@ namespace PlatformService.Messaging
             using var connection = factory.CreateConnection();
             using var channel = connection.CreateModel();
 
-            _channel.ExchangeDeclare(
+            channel.ExchangeDeclare(
                 exchange: "trigger",
                 type: ExchangeType.Fanout);
 
-            _connection.ConnectionShutdown += RabbitMQ_ConnectionShutdown;
+            connection.ConnectionShutdown += RabbitMQ_ConnectionShutdown;
 
             channel.QueueDeclare
                 (queue: "", 

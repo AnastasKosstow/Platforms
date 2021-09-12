@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PlatformService.Infrastructure.Services;
+using PlatformService.Messaging;
 using PlatformService.Persistence;
 using PlatformService.Persistence.Models;
 using PlatformService.Persistence.Repositories;
@@ -19,7 +20,7 @@ namespace PlatformService.Infrastructure
                 .AddDatabase(configuration, isProduction)
                 .AddServices()
                 .AddRepository()
-                .AddHttpClient();
+                .AddServiceBus();
         }
 
 
@@ -53,6 +54,14 @@ namespace PlatformService.Infrastructure
         {
             return services
                 .AddScoped<IAsyncRepository<Platform>, AsyncRepository<Platform>>();
+        }
+
+
+        private static IServiceCollection AddServiceBus(
+            this IServiceCollection services)
+        {
+            return services
+                .AddSingleton<IMessageBusClient, MessageBusClient>();
         }
     }
 }
