@@ -27,16 +27,8 @@ namespace CommandsService.Infrastructure.Services
 
         public async Task<bool> ExternalPlatformExist(int externalPlatformId, CancellationToken cancellationToken)
         {
-            var platform = await _asyncRepository.GetSingle(
-                x => x.Id == externalPlatformId, 
-                cancellationToken);
-
-            if (platform == null)
-            {
-                // throw error
-            }
-
-
+            return (await _asyncRepository.GetAll(cancellationToken))
+                .Any(x => x.Id == externalPlatformId);
         }
     }
 }

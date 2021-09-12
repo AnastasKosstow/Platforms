@@ -5,6 +5,7 @@ using CommandsService.Persistence;
 using CommandsService.Persistence.Models;
 using CommandsService.Persistence.Repositories;
 using CommandsService.Infrastructure.Services;
+using CommandsService.Infrastructure.Messaging.EventProcessing;
 
 namespace CommandsService.Infrastructure
 {
@@ -17,7 +18,8 @@ namespace CommandsService.Infrastructure
             return services
                 .AddDatabase(configuration)
                 .AddServices()
-                .AddRepository();
+                .AddRepository()
+                .AddEventProcessor();
         }
 
 
@@ -48,6 +50,13 @@ namespace CommandsService.Infrastructure
             return services
                 .AddScoped<IAsyncRepository<Command>, AsyncRepository<Command>>()
                 .AddScoped<IAsyncRepository<Platform>, AsyncRepository<Platform>>();
+        }
+
+        private static IServiceCollection AddEventProcessor(
+            this IServiceCollection services)
+        {
+            return services
+                .AddSingleton<IEventProcessor, EventProcessor>();
         }
     }
 }

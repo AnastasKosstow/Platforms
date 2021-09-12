@@ -1,5 +1,5 @@
 ﻿
-namespace CommandsService.Messaging.Models
+namespace CommandsService.Infrastructure.Messaging.Models
 {
     public record PlatformPublishModel
     {
