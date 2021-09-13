@@ -8,6 +8,13 @@ using System.Threading;
 
 namespace CommandsService.Infrastructure.Messaging.EventProcessing
 {
+
+    /*
+     * TODO: Refactoring!!!
+     * EventProcessor class is made to test that everything is working,
+     * but the logic needs refactoring.
+     */
+
     public class EventProcessor : IEventProcessor
     {
         private readonly IServiceScopeFactory _scopeFactory;
