@@ -17,8 +17,4 @@
     <ProjectReference Include="..\PlatformService.Persistence\PlatformService.Persistence.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Operations\Delete\" />
-  </ItemGroup>
-
 </Project>
