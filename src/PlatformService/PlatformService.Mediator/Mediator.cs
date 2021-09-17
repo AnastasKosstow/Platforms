@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using PlatformService.Mediator.Abstractions;
@@ -8,7 +9,6 @@ namespace PlatformService.Mediator
 {
     public class Mediator : IMediator
     {
-        //private readonly Func<Type, object> _serviceResolver;
         private readonly IServiceProvider _serviceProvider;
         private readonly IDictionary<Type, Type> _handlerDetails;
 
@@ -18,7 +18,7 @@ namespace PlatformService.Mediator
             _handlerDetails = handlerDetails;
         }
 
-        public async Task<TResponse> SendAsync<TResponse>(IRequest<TResponse> request)
+        public async Task<TResponse> SendAsync<TResponse>(IRequest<TResponse> request, CancellationToken cancellationToken)
         {
             var requestType = request.GetType();
             if (!_handlerDetails.ContainsKey(requestType))
