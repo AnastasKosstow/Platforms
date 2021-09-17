@@ -1,5 +1,5 @@
-﻿using System.Linq;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using PlatformService.Application.Models.Get;
@@ -10,14 +10,16 @@ using Mapster;
 
 namespace PlatformService.Infrastructure.Operations
 {
-    public class GetAllPlatformsHandler : BaseHandler, IHandler<GetPlatformsRequestModel, GetPlatformsSuccessModel>
+    public class GetPlatformsHandler : BaseHandler, IHandler<GetPlatformsRequestModel, GetPlatformsSuccessModel>
     {
-        public GetAllPlatformsHandler(IAsyncRepository<Platform> asyncRepository)
+        public GetPlatformsHandler(IAsyncRepository<Platform> asyncRepository)
             : base(asyncRepository)
         {
         }
 
-        public async Task<GetPlatformsSuccessModel> HandleAsync(GetPlatformsRequestModel request)
+        public async Task<GetPlatformsSuccessModel> HandleAsync(
+            GetPlatformsRequestModel request,
+            CancellationToken cancellationToken)
         {
             IEnumerable<PlatformModel> platforms =
                 (await AsyncRepository.All(CancellationToken.None))
