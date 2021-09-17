@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
 using PlatformService.Mediator.Abstractions;
 
 namespace PlatformService.Mediator
 {
     public class Mediator : IMediator
     {
-        private readonly Func<Type, object> _serviceResolver;
+        //private readonly Func<Type, object> _serviceResolver;
+        private readonly IServiceProvider _serviceProvider;
         private readonly IDictionary<Type, Type> _handlerDetails;
 
-        public Mediator(Func<Type, object> serviceResolver, IDictionary<Type, Type> handlerDetails)
+        public Mediator(IServiceProvider serviceProvider, IDictionary<Type, Type> handlerDetails)
         {
-            _serviceResolver = serviceResolver;
+            _serviceProvider = serviceProvider;
             _handlerDetails = handlerDetails;
         }
 
@@ -24,15 +26,18 @@ namespace PlatformService.Mediator
                 throw new Exception($"No handler to handle request of type: {requestType.Name}");
             }
 
-            _handlerDetails.TryGetValue(requestType, out var requestHandlerType);
+            using (var scope = _serviceProvider.CreateScope())
+            {
+                _handlerDetails.TryGetValue(requestType, out var requestHandlerType);
 
-            object handler = _serviceResolver(requestHandlerType);
+                var handler = scope.ServiceProvider.GetRequiredService(requestHandlerType);
 
-            return await
-                (Task<TResponse>)handler
-                .GetType()
-                .GetMethod("HandleAsync")
-                .Invoke(handler, new[] { request });
+                return await
+                    (Task<TResponse>)handler
+                    .GetType()
+                    .GetMethod("HandleAsync")
+                    .Invoke(handler, new[] { request });
+            }  
         }
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PlatformService.Infrastructure.Services;
+using PlatformService.Mediator.DependencyInjection;
 using PlatformService.Messaging;
 using PlatformService.Persistence;
 using PlatformService.Persistence.Models;
@@ -20,7 +21,8 @@ namespace PlatformService.Infrastructure
                 .AddDatabase(configuration, isProduction)
                 .AddServices()
                 .AddRepository()
-                .AddServiceBus();
+                .AddServiceBus()
+                .AddMediator();
         }
 
 
@@ -62,6 +64,14 @@ namespace PlatformService.Infrastructure
         {
             return services
                 .AddSingleton<IMessageBusClient, MessageBusClient>();
+        }
+        
+        
+        private static IServiceCollection AddMediator(
+            this IServiceCollection services)
+        {
+            return services
+                .AddMediator(ServiceLifetime.Scoped, typeof(InfrastructureConfiguration));
         }
     }
 }

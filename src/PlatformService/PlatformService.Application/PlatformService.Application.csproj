@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PlatformService.Mediator\PlatformService.Mediator.csproj" />
     <ProjectReference Include="..\PlatformService.Messaging\PlatformService.Messaging.csproj" />
   </ItemGroup>
 

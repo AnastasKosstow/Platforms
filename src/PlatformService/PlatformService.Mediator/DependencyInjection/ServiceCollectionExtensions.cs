@@ -10,31 +10,37 @@ namespace PlatformService.Mediator.DependencyInjection
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddMediator(this IServiceCollection services, ServiceLifetime lifetime, params Type[] markers)
+        public static IServiceCollection AddMediator(
+            this IServiceCollection services, 
+            ServiceLifetime lifetime, 
+            params Type[] assemblies)
         {
             var handlerInfo = new Dictionary<Type, Type>();
 
-            foreach (var marker in markers)
+            //for testing
+            var typesRequests = new List<Type>();
+            var typesHandlers = new List<Type>();
+
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
-                var assembly = marker.Assembly;
-                var requests = GetClassesImplementingInterface(assembly, typeof(IRequest<>));
-                var handlers = GetClassesImplementingInterface(assembly, typeof(IHandler<,>));
-
-                requests.ForEach(type =>
-                {
-                    // IHandler`2
-                    // GetInterface search for IHandler with two generic arguments
-                    handlerInfo[type] =
-                        handlers.SingleOrDefault(x => type == x.GetInterface("IHandler`2")!
-                                                               .GetGenericArguments()[0]);
-                });
-
-                var serviceDescriptor = handlers.Select(x => new ServiceDescriptor(x, x, lifetime));
-                services.TryAdd(serviceDescriptor);
+                typesRequests.AddRange(GetClassesImplementingInterface(assembly, typeof(IRequest<>)));
+                typesHandlers.AddRange(GetClassesImplementingInterface(assembly, typeof(IHandler<,>)));
             }
 
-            services.AddSingleton<IMediator>(x => 
-                new Mediator(x.GetRequiredService, handlerInfo));
+            typesRequests.ForEach(type =>
+            {
+                // IHandler`2
+                // GetInterface search for IHandler with two generic arguments
+                handlerInfo[type] =
+                    typesHandlers.SingleOrDefault(x => type == x.GetInterface("IHandler`2")!
+                                                           .GetGenericArguments()[0]);
+            });
+
+            var serviceDescriptor = typesHandlers.Select(x => new ServiceDescriptor(x, x, lifetime));
+            services.TryAdd(serviceDescriptor);
+
+            services.AddSingleton<IMediator>(serviceProvider => 
+                new Mediator(serviceProvider, handlerInfo));
 
             return services;
         }
@@ -50,7 +56,7 @@ namespace PlatformService.Mediator.DependencyInjection
                             .Any(@interface => @interface.IsGenericType &&
                                                @interface.GetGenericTypeDefinition() == interfaceType);
 
-                        return !type.IsInterface && !type.IsAbstract && implementRequestType;
+                        return implementRequestType;
                     });
         }
 
