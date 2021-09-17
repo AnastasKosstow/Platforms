@@ -1,7 +1,8 @@
-﻿
+﻿using PlatformService.Mediator.Abstractions;
+
 namespace PlatformService.Application.Models.Delete
 {
-    public record DeletePlatformRequestModel
+    public record DeletePlatformRequestModel : IRequest<DeletePlatformSuccessModel>
     {
         public int Id { get; set; }
 

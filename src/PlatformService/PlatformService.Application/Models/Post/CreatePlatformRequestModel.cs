@@ -1,7 +1,8 @@
-﻿
+﻿using PlatformService.Mediator.Abstractions;
+
 namespace PlatformService.Application.Models.Post
 {
-    public record CreatePlatformRequestModel
+    public record CreatePlatformRequestModel : IRequest<CreatePlatformSuccessModel>
     {
         public string Name { get; set; }
 
