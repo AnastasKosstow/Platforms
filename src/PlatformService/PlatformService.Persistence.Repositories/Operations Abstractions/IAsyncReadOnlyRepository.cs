@@ -8,10 +8,8 @@ namespace PlatformService.Persistence.Repositories.Abstractions
 {
     public interface IAsyncReadOnlyRepository<TEntity>
     {
-        Task<IEnumerable<TEntity>> All(CancellationToken cancellationToken);
+        Task<IEnumerable<TEntity>> AllAsync(CancellationToken cancellationToken);
 
-        Task<TEntity[]> Find(Expression<Func<TEntity, bool>> filter, CancellationToken cancellationToken);
-
-        Task<TEntity> GetSingle(Expression<Func<TEntity, bool>> filter, CancellationToken cancellationToken);
+        Task<TEntity> SingleAsync(Expression<Func<TEntity, bool>> filter, CancellationToken cancellationToken);
     }
 }

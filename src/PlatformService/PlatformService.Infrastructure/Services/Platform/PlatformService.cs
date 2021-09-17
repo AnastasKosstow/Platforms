@@ -12,6 +12,7 @@ using PlatformService.Persistence.Repositories;
 using PlatformService.Messaging;
 using PlatformService.Messaging.Models;
 using Mapster;
+using PlatformService.Application.Models.Common;
 
 namespace PlatformService.Infrastructure.Services
 {
@@ -28,7 +29,7 @@ namespace PlatformService.Infrastructure.Services
             CancellationToken cancellationToken)
         {
             IEnumerable<PlatformModel> platforms = 
-                (await AsyncRepository.All(cancellationToken))
+                (await AsyncRepository.AllAsync(cancellationToken))
                 .Select(platform => platform.Adapt<PlatformModel>());
 
             return new GetPlatformsSuccessModel(platforms);

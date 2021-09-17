@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Mapster;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -6,7 +7,7 @@ using PlatformService.Application.Models.Get;
 using PlatformService.Mediator.Abstractions;
 using PlatformService.Persistence.Models;
 using PlatformService.Persistence.Repositories;
-using Mapster;
+using PlatformService.Application.Models.Common;
 
 namespace PlatformService.Infrastructure.Operations
 {
@@ -22,7 +23,7 @@ namespace PlatformService.Infrastructure.Operations
             CancellationToken cancellationToken)
         {
             IEnumerable<PlatformModel> platforms =
-                (await AsyncRepository.All(CancellationToken.None))
+                (await AsyncRepository.AllAsync(CancellationToken.None))
                 .Select(platform => platform.Adapt<PlatformModel>());
 
             return new GetPlatformsSuccessModel(platforms);

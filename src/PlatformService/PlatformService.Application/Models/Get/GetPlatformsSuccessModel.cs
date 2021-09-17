@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using PlatformService.Application.Models.Common;
+using System.Collections.Generic;
 
 namespace PlatformService.Application.Models.Get
 {
@@ -9,12 +10,5 @@ namespace PlatformService.Application.Models.Get
             Platforms = platforms;
         }
         public IEnumerable<PlatformModel> Platforms { get; set; }
-    }
-
-    public record PlatformModel
-    {
-        public string Name { get; set; }
-
-        public string Publisher { get; set; }
     }
 }

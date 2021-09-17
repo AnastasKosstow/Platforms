@@ -17,7 +17,7 @@ namespace PlatformService.Persistence.Repositories
         }
 
 
-        public virtual async Task<IEnumerable<TEntity>> All(CancellationToken cancellationToken)
+        public virtual async Task<IEnumerable<TEntity>> AllAsync(CancellationToken cancellationToken)
         {
             return await ApplicationDbContext
                 .Set<TEntity>()
@@ -25,16 +25,7 @@ namespace PlatformService.Persistence.Repositories
         }
 
 
-        public virtual async Task<TEntity[]> Find(Expression<Func<TEntity, bool>> filter, CancellationToken cancellationToken)
-        {
-            return await ApplicationDbContext
-                .Set<TEntity>()
-                .Where(filter)
-                .ToArrayAsync(cancellationToken);
-        }
-
-
-        public virtual async Task<TEntity> GetSingle(Expression<Func<TEntity, bool>> filter, CancellationToken cancellationToken)
+        public virtual async Task<TEntity> SingleAsync(Expression<Func<TEntity, bool>> filter, CancellationToken cancellationToken)
         {
             return await ApplicationDbContext
                 .Set<TEntity>()

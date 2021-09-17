@@ -36,7 +36,7 @@ namespace PlatformService.Mediator
                     (Task<TResponse>)handler
                     .GetType()
                     .GetMethod("HandleAsync")
-                    .Invoke(handler, new[] { request });
+                    .Invoke(handler, new object[] { request, cancellationToken });
             }  
         }
     }

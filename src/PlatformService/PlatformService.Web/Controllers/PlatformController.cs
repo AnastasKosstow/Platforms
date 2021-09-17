@@ -15,17 +15,26 @@ namespace PlatformService.Web.Controllers
         public PlatformController(IMediator mediator)
             =>
             _mediator = mediator;
-        
+
 
         [HttpGet]
-        public async Task<GetPlatformsSuccessModel> GetPlatforms(
+        public async Task<GetPlatformsSuccessModel> All(
+            GetPlatformsRequestModel requestModel,
             CancellationToken cancellationToken)
             =>
-            await _mediator.SendAsync(new GetPlatformsRequestModel(), cancellationToken);
+            await _mediator.SendAsync(requestModel, cancellationToken);
+
+
+        [HttpGet]
+        public async Task<FindPlatformSuccessModel> Single(
+            FindPlatformRequestModel requestModel,
+            CancellationToken cancellationToken)
+            =>
+            await _mediator.SendAsync(requestModel, cancellationToken);
 
 
         [HttpPost]
-        public async Task<CreatePlatformSuccessModel> CreatePlatform(
+        public async Task<CreatePlatformSuccessModel> Create(
             CreatePlatformRequestModel requestModel,
             CancellationToken cancellationToken)
             =>
@@ -33,7 +42,7 @@ namespace PlatformService.Web.Controllers
 
 
         [HttpDelete]
-        public async Task<DeletePlatformSuccessModel> DeletePlatform(
+        public async Task<DeletePlatformSuccessModel> Delete(
             DeletePlatformRequestModel requestModel,
             CancellationToken cancellationToken)
             =>
