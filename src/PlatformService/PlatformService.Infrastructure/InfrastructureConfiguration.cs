@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PlatformService.Mediator.DependencyInjection;
@@ -20,7 +22,7 @@ namespace PlatformService.Infrastructure
                 .AddDatabase(configuration, isProduction)
                 .AddRepository()
                 .AddServiceBus()
-                .AddMediator();
+                .AddMediatorImpl();
         }
 
 
@@ -57,11 +59,15 @@ namespace PlatformService.Infrastructure
         }
         
         
-        private static IServiceCollection AddMediator(
+        private static IServiceCollection AddMediatorImpl(
             this IServiceCollection services)
         {
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies()
+                       .Where(assembly => assembly.FullName.Contains("PlatformService"))
+                       .ToArray();
+
             return services
-                .AddMediator(ServiceLifetime.Scoped, typeof(InfrastructureConfiguration));
+                .AddMediator(config => config.AsSingleton(), assemblies);
         }
     }
 }

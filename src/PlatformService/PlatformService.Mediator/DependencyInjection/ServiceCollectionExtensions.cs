@@ -3,68 +3,44 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using PlatformService.Mediator.Abstractions;
+using PlatformService.Mediator.DependencyInjection.Registration;
 
 namespace PlatformService.Mediator.DependencyInjection
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddMediator(
-            this IServiceCollection services, 
-            ServiceLifetime lifetime, 
-            params Type[] assemblies)
+        public static IServiceCollection AddMediator(this IServiceCollection services, params Assembly[] assemblies)
         {
-            var handlerInfo = new Dictionary<Type, Type>();
+            return services.AddMediator(assemblies, configuration: null);
+        }
 
-            //for testing
-            var typesRequests = new List<Type>();
-            var typesHandlers = new List<Type>();
 
-            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
-            {
-                typesRequests.AddRange(GetClassesImplementingInterface(assembly, typeof(IRequest<>)));
-                typesHandlers.AddRange(GetClassesImplementingInterface(assembly, typeof(IHandler<,>)));
-            }
+        public static IServiceCollection AddMediator(this IServiceCollection services, Action<MediatorServiceConfiguration> configuration, params Assembly[] assemblies)
+        {
+            return services.AddMediator(assemblies, configuration);
+        }
 
-            typesRequests.ForEach(type =>
-            {
-                // IHandler`2
-                // GetInterface search for IHandler with two generic arguments
-                handlerInfo[type] =
-                    typesHandlers.SingleOrDefault(x => type == x.GetInterface("IHandler`2")!
-                                                           .GetGenericArguments()[0]);
-            });
 
-            var serviceDescriptor = typesHandlers.Select(x => new ServiceDescriptor(x, x, lifetime));
-            services.TryAdd(serviceDescriptor);
+        private static IServiceCollection AddMediator(this IServiceCollection services, IEnumerable<Assembly> assemblies, Action<MediatorServiceConfiguration> configuration)
+        {
+            ValidateAssemblyCount(assemblies);
 
-            services.AddSingleton<IMediator>(serviceProvider => 
-                new Mediator(serviceProvider, handlerInfo));
+            var serviceConfig = new MediatorServiceConfiguration();
+            configuration?.Invoke(serviceConfig);
+
+            ServiceRegistrar.AddRequiredServices(services, serviceConfig);
+            ServiceRegistrar.AddMediatorClasses(services, assemblies);
 
             return services;
         }
 
 
-        private static IEnumerable<Type> GetClassesImplementingInterface(Assembly assembly, Type interfaceType)
+        private static void ValidateAssemblyCount(IEnumerable<Assembly> assemblies)
         {
-            return assembly.ExportedTypes
-                    .Where(type =>
-                    {
-                        var implementRequestType = type
-                            .GetInterfaces()
-                            .Any(@interface => @interface.IsGenericType &&
-                                               @interface.GetGenericTypeDefinition() == interfaceType);
-
-                        return implementRequestType;
-                    });
-        }
-
-
-        public static void ForEach<T>(this IEnumerable<T> list, Action<T> action)
-        {
-            foreach (var element in list)
-                action(element);
+            if (!assemblies.Any())
+            {
+                throw new ArgumentException("No assemblies found to scan. Supply at least one assembly to scan for handlers.");
+            }
         }
     }
 }

@@ -1,8 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using PlatformService.Mediator.Abstractions;
 using System;
 
-namespace PlatformService.Mediator.Extensions.DependencyInjection
+namespace PlatformService.Mediator.DependencyInjection
 {
     public class MediatorServiceConfiguration
     {
@@ -13,13 +12,6 @@ namespace PlatformService.Mediator.Extensions.DependencyInjection
         {
             MediatorImplementationType = typeof(Mediator);
             Lifetime = ServiceLifetime.Transient;
-        }
-
-        public MediatorServiceConfiguration Using<TMediator>() 
-            where TMediator : IMediator
-        {
-            MediatorImplementationType = typeof(TMediator);
-            return this;
         }
 
         public MediatorServiceConfiguration AsSingleton()

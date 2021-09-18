@@ -31,9 +31,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mediator", "Mediator", "{CB
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlatformService.Mediator", "PlatformService.Mediator\PlatformService.Mediator.csproj", "{83405D61-0C84-45F8-847D-B6C5F6815AB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformService.Mediator.Extensions.DependencyInjection", "PlatformService.Mediator.Extensions.DependencyInjection\PlatformService.Mediator.Extensions.DependencyInjection.csproj", "{B7C03E9C-EBD4-4FC0-BE68-CAC28AA4D56C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformService.Mediator.Abstractions", "PlatformService.Mediator.Abstractions\PlatformService.Mediator.Abstractions.csproj", "{58E1288D-0A65-4285-B147-457B02775664}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PlatformService.Mediator.Abstractions", "PlatformService.Mediator.Abstractions\PlatformService.Mediator.Abstractions.csproj", "{58E1288D-0A65-4285-B147-457B02775664}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,10 +71,6 @@ Global
 		{83405D61-0C84-45F8-847D-B6C5F6815AB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83405D61-0C84-45F8-847D-B6C5F6815AB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83405D61-0C84-45F8-847D-B6C5F6815AB4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B7C03E9C-EBD4-4FC0-BE68-CAC28AA4D56C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B7C03E9C-EBD4-4FC0-BE68-CAC28AA4D56C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B7C03E9C-EBD4-4FC0-BE68-CAC28AA4D56C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B7C03E9C-EBD4-4FC0-BE68-CAC28AA4D56C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{58E1288D-0A65-4285-B147-457B02775664}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{58E1288D-0A65-4285-B147-457B02775664}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{58E1288D-0A65-4285-B147-457B02775664}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -94,7 +88,6 @@ Global
 		{6828D359-EA59-4E98-8B38-33ADF0B2A524} = {65929C8D-8714-40EC-9C0A-A41BB86214AE}
 		{6AF0361A-D3F8-404D-B153-D524B2C6C1A7} = {65929C8D-8714-40EC-9C0A-A41BB86214AE}
 		{83405D61-0C84-45F8-847D-B6C5F6815AB4} = {CB3947C8-EB53-4110-8DAA-9C4524D29A25}
-		{B7C03E9C-EBD4-4FC0-BE68-CAC28AA4D56C} = {CB3947C8-EB53-4110-8DAA-9C4524D29A25}
 		{58E1288D-0A65-4285-B147-457B02775664} = {CB3947C8-EB53-4110-8DAA-9C4524D29A25}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
