@@ -10,42 +10,45 @@ namespace PlatformService.Web.Controllers
 {
     public class PlatformController : ApiController
     {
-        private readonly IMediator _mediator;
-
         public PlatformController(IMediator mediator)
-            =>
-            _mediator = mediator;
+            : base(mediator)
+        {
+        }
 
 
         [HttpGet]
+        [Route(nameof(All))]
         public async Task<GetPlatformsSuccessModel> All(
-            GetPlatformsRequestModel requestModel,
+            [FromQuery]GetPlatformsRequestModel requestModel,
             CancellationToken cancellationToken)
             =>
-            await _mediator.SendAsync(requestModel, cancellationToken);
+            await Mediator.SendAsync(requestModel, cancellationToken);
 
 
         [HttpGet]
+        [Route(nameof(Single))]
         public async Task<FindPlatformSuccessModel> Single(
             FindPlatformRequestModel requestModel,
             CancellationToken cancellationToken)
             =>
-            await _mediator.SendAsync(requestModel, cancellationToken);
+            await Mediator.SendAsync(requestModel, cancellationToken);
 
 
         [HttpPost]
+        [Route(nameof(Create))]
         public async Task<CreatePlatformSuccessModel> Create(
             CreatePlatformRequestModel requestModel,
             CancellationToken cancellationToken)
             =>
-            await _mediator.SendAsync(requestModel, cancellationToken);
+            await Mediator.SendAsync(requestModel, cancellationToken);
 
 
         [HttpDelete]
+        [Route(nameof(Delete))]
         public async Task<DeletePlatformSuccessModel> Delete(
             DeletePlatformRequestModel requestModel,
             CancellationToken cancellationToken)
             =>
-            await _mediator.SendAsync(requestModel, cancellationToken);
+            await Mediator.SendAsync(requestModel, cancellationToken);
     }
 }

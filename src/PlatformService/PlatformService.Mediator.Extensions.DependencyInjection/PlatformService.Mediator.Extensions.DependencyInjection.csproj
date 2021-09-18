@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PlatformService.Mediator.Abstractions\PlatformService.Mediator.Abstractions.csproj" />
+    <ProjectReference Include="..\PlatformService.Mediator\PlatformService.Mediator.csproj" />
   </ItemGroup>
 
 </Project>

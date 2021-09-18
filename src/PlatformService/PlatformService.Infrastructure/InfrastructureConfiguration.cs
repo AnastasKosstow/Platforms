@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using PlatformService.Infrastructure.Services;
 using PlatformService.Mediator.DependencyInjection;
 using PlatformService.Messaging;
 using PlatformService.Persistence;
@@ -19,7 +18,6 @@ namespace PlatformService.Infrastructure
         {
             return services
                 .AddDatabase(configuration, isProduction)
-                .AddServices()
                 .AddRepository()
                 .AddServiceBus()
                 .AddMediator();
@@ -40,14 +38,6 @@ namespace PlatformService.Infrastructure
                     options.UseSqlServer(connectionString));
 
             return services;
-        }
-
-
-        private static IServiceCollection AddServices(
-            this IServiceCollection services)
-        {
-            return services
-                .AddScoped<IPlatformService, Services.PlatformService>();
         }
 
 
