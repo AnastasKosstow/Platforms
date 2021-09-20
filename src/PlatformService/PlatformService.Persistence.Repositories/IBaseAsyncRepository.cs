@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace PlatformService.Persistence.Repositories
 {
-    public interface IBaseAsyncRepository<TEntity> : IDisposable
+    public interface IBaseAsyncRepository<out TEntity> : IDisposable
     {
         Task<int> CompleteAsync(CancellationToken cancellationToken);
     }
