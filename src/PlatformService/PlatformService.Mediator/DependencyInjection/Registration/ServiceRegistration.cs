@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -21,9 +22,7 @@ namespace PlatformService.Mediator.DependencyInjection.Registration
 
         public static void AddMediatorClasses(IServiceCollection services, IEnumerable<Assembly> assembliesToScan)
         {
-            var handlerInfo = new Dictionary<Type, Type>();
-
-            //for testing
+            var handlerInfo = new ConcurrentDictionary<Type, Type>();
             var typesRequests = new List<Type>();
             var typesHandlers = new List<Type>();
 
@@ -44,7 +43,7 @@ namespace PlatformService.Mediator.DependencyInjection.Registration
 
             var serviceDescriptor = typesHandlers.Select(x => new ServiceDescriptor(x, x, ServiceLifetime.Scoped));
             services.TryAdd(serviceDescriptor);
-            services.AddSingleton<IDictionary<Type, Type>>(serviceProvider => handlerInfo);
+            services.AddSingleton<ConcurrentDictionary<Type, Type>>(serviceProvider => handlerInfo);
         }
 
 
